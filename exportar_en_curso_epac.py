@@ -17,10 +17,13 @@ import time
 from pathlib import Path
 from typing import Optional
 
-# ─── Añadir raíz del repo contacto_whatsapp al path ──────────────────────────
-_EPAC_ROOT = Path(__file__).resolve().parent.parent / "contacto_whatsapp"
-if _EPAC_ROOT.is_dir() and str(_EPAC_ROOT) not in sys.path:
-    sys.path.insert(0, str(_EPAC_ROOT))
+# ─── Añadir raíz del repo de módulos compartidos al path ─────────────────────
+for _candidate in ("contacto_whatsapp", "preliminares-upload"):
+    _EPAC_ROOT = Path(__file__).resolve().parent.parent / _candidate
+    if _EPAC_ROOT.is_dir():
+        if str(_EPAC_ROOT) not in sys.path:
+            sys.path.insert(0, str(_EPAC_ROOT))
+        break
 # ─────────────────────────────────────────────────────────────────────────────
 
 try:
@@ -435,6 +438,7 @@ def main() -> None:
         login_pg = LoginPage(page)
         login_pg.open(config.base_url)
         login_pg.login(username=config.username, password=config.password)
+        page.wait_for_selector('a[role="menuitem"]', timeout=30_000)
 
         print("Navegando a Peritaciones Diversos...")
         nav = NavigationPage(page, config)

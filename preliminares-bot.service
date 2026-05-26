@@ -1,0 +1,19 @@
+[Unit]
+Description=Bot de Telegram – Preliminares Extraction
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/preliminares-extraction
+Environment=PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64
+ExecStart=/usr/bin/python3 /home/ubuntu/preliminares-extraction/bot_telegram.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=preliminares-bot
+
+[Install]
+WantedBy=multi-user.target

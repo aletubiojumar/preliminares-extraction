@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import html
 import logging
 import subprocess
 import sys
@@ -61,7 +62,7 @@ async def enviar_excel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     if resultado.returncode != 0 or not EXCEL_PATH.exists():
         detalle = resultado.stderr[-500:].strip() if resultado.stderr else "Sin detalles."
         await update.message.reply_text(
-            f"❌ Error al generar el Excel.\n<code>{detalle}</code>",
+            f"❌ Error al generar el Excel.\n<code>{html.escape(detalle)}</code>",
             parse_mode="HTML",
             reply_markup=_TECLADO,
         )
