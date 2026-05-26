@@ -18,7 +18,13 @@ python3 exportar_en_curso_epac.py [--headless] [--out RUTA] [--env FICHERO]
 | `--env` | Ruta a un fichero `.env` alternativo |
 
 ### `bot_telegram.py`
-Bot de Telegram con un botón persistente en el teclado. Al pulsarlo envía el Excel generado por el script anterior.
+Bot de Telegram con un botón persistente en el teclado. Al pulsarlo:
+
+1. Desaparece el botón y aparece el mensaje "⏳ Generando Excel, espera un momento..."
+2. Se ejecuta `exportar_en_curso_epac.py --headless` en segundo plano
+3. Cuando termina, envía el Excel y restaura el botón
+
+Si se pulsa mientras ya hay una generación en curso, el bot avisa y no lanza una segunda ejecución.
 
 ```bash
 python3 bot_telegram.py
