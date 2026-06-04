@@ -1,0 +1,10 @@
+services:
+  bot:
+    build:
+      context: /home/ubuntu
+      dockerfile: preliminares-extraction/Dockerfile
+    env_file: /opt/preliminares-extraction/.env
+    volumes:
+      - /opt/preliminares-extraction/output:/app/output
+      - /home/ubuntu/certs/peritoline:/app/certs:ro
+    restart: unless-stopped

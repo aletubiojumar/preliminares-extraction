@@ -63,7 +63,7 @@ COLUMNAS: list[str] = [
     "I.",
 ]
 
-OUTPUT_DIR: Path = Path.home() / "preliminares-extraction"
+OUTPUT_DIR: Path = Path("/app/output")
 
 _IFRAME_SELECTOR: str = "iframe[name='appArea']"
 
